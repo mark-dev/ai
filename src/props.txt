@@ -1,0 +1,1 @@
+[{difficulty,mid},{type,offset},{labs,false},{marks,false},{depends_marks,false}].

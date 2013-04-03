@@ -1,0 +1,100 @@
+[
+
+	{
+	{difficulty,eq,"easy"},
+	[
+			{
+			{type,eq,"offset"},
+			[		{
+					{marks,eq,"true"},
+					[
+						{
+						{depends_marks,eq,"false"},
+						low	
+						},
+						{
+						{depends_marks,eq,"true"},
+						mid	
+						}
+					]	
+					},
+					{
+					{marks,eq,"false"},
+					low	
+					}]	
+			},
+	
+			{
+			{type,eq,"exam"},
+			[
+                        	{
+				{labs,eq,"true"},
+				mid	
+				},
+				{
+				{labs,eq,"false"},
+				[
+					{
+					{marks,eq,"true"},
+					mid	
+					},
+					{
+					{marks,eq,"false"},
+					low	
+					}
+				]	
+				}
+				  			
+			]	
+			}
+	]	
+	},
+	
+	{
+	{difficulty,eq,"mid"},
+	[
+		{
+		{type,eq,"exam"},
+		mid	
+		},
+		{
+		{type,eq,"offset"},
+		[		
+			{
+			{labs,eq,"true"},
+			nigh	
+			},
+			{
+				{labs,eq,"false"},
+				[
+					{
+						{marks,eq,"false"},
+						[
+							{
+							{depends_marks,eq,"false"},
+							low	
+							},
+	
+							{
+							{depends_marks,eq,"true"},
+							mid	
+							}
+						]	
+					},
+					{
+						{marks,eq,"true"},
+						mid
+					}
+				]
+			}
+		]	
+		}
+	]	
+	},
+
+	{
+	{difficulty,eq,"hard"},
+	high	
+	}
+	
+].
