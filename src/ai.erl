@@ -24,7 +24,7 @@ calc_result([],_)->
     ?LOG("reached end without result ~n"),
     failed;
 %Выйти с результатом в случае если условие верно
-calc_result([{Condition,Result}|Tail],Props) when is_atom(Result)-> 
+calc_result([{Condition,{result,Result}}|Tail],Props) -> 
     case calc_condition(Condition,Props) of
 	true -> Result; %Условие выполненно = получаем результат
 	false ->
@@ -44,12 +44,12 @@ calc_condition({A1,Cond,A2},Props)->
     {ok,F} = cond_to_function(Cond),
     Arg1 = get_real_arg(A1,Props),
     Arg2 = get_real_arg(A2,Props),
-    erlang:apply(erlang,F,[Arg1,Arg2]).
+    F(Arg1,Arg2).
 %Возвращает значение аргумента
 %которое будет использоваться для расчета условия
 get_real_arg(Arg,Props) ->
     case Arg of
-	%Сравниваются два свойства
+	%Аргумент - свойство из props.txt
 	_ when is_atom(Arg)->
 	    get_key(Arg,Props);
 	%Аргумент = константа(не числовая),например да или нет
@@ -57,7 +57,11 @@ get_real_arg(Arg,Props) ->
 	    list_to_atom(Arg);
 	%Аргумент = число
 	_ when is_integer(Arg) ->
-	    Arg
+	    Arg;
+	{Min,Max}-> %between
+	    {Min,Max};
+	_ ->
+	    ?LOG("unknown condition argument ~n")
     end.
 get_key(Key,PropList) when is_atom(Key)->	    
     case proplists:get_value(Key,PropList) of
@@ -71,10 +75,13 @@ get_key(Key,PropList) when is_atom(Key)->
 %{ok,FunctionAtom} | {error,Reason}
 cond_to_function(Cond) when is_atom(Cond)->
     case Cond of
-	less -> {ok,'<'};
-	greater -> {ok,'>'};
-	equals -> {ok,'=='};
-	eq -> {ok,'=='};
+	less -> {ok,fun erlang:'<'/2};
+	greater -> {ok,fun erlang:'>'/2};
+	equals -> {ok,fun erlang:'=='/2};
+	eq -> {ok,fun erlang:'=='/2};
+	between -> {ok, fun(A1,{Min,Max})->
+				(A1>Min) and (A1<Max)
+			end};
 	_ ->
 	    ?LOG("unknown condition"),
 	    {error,unknown_cond}

@@ -10,17 +10,17 @@
 					[
 						{
 						{depends_marks,eq,"false"},
-						low	
+						{result,low}	
 						},
 						{
 						{depends_marks,eq,"true"},
-						mid	
+						{result,mid}	
 						}
 					]	
 					},
 					{
 					{marks,eq,"false"},
-					low	
+					{result,low}	
 					}]	
 			},
 	
@@ -29,18 +29,18 @@
 			[
                         	{
 				{labs,eq,"true"},
-				mid	
+				{result,mid}	
 				},
 				{
 				{labs,eq,"false"},
 				[
 					{
 					{marks,eq,"true"},
-					mid	
+					{result,mid}	
 					},
 					{
 					{marks,eq,"false"},
-					low	
+					{result,low}	
 					}
 				]	
 				}
@@ -55,14 +55,14 @@
 	[
 		{
 		{type,eq,"exam"},
-		mid	
+		{result,mid}	
 		},
 		{
 		{type,eq,"offset"},
 		[		
 			{
 			{labs,eq,"true"},
-			high	
+			{result,high}	
 			},
 			{
 				{labs,eq,"false"},
@@ -72,18 +72,18 @@
 						[
 							{
 							{depends_marks,eq,"false"},
-							low	
+							{result,low}	
 							},
 	
 							{
 							{depends_marks,eq,"true"},
-							mid	
+							{result,mid}	
 							}
 						]	
 					},
 					{
 						{marks,eq,"true"},
-						mid
+						{result,mid}
 					}
 				]
 			}
@@ -94,7 +94,7 @@
 
 	{
 	{difficulty,eq,"hard"},
-	high	
+	{result,high}	
 	}
 	
 ].
